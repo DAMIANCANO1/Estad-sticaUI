@@ -4,6 +4,8 @@
  */
 package Pruebas;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Damian
@@ -22,7 +24,6 @@ public class Pruebas1 extends javax.swing.JFrame {
     public void CapturaDatos() {
         String A = (DATOS.getText());
         String[] lineas = A.split("\\n");
-        System.out.println(lineas.length);
         double numeros[] = new double[lineas.length];
 
         for (int i = 0; i < lineas.length; i++) {
@@ -58,14 +59,29 @@ public class Pruebas1 extends javax.swing.JFrame {
         // para poder obtener el limite inferior y limite superior
         double LimiteInferior = menor;
         double LimiteSuperior;
+        int Clases;
+        int Igual = 0;
+        int Suma =0;
 
         for (int X = 0; X < intervalo; X++) {
             LimiteSuperior = (LimiteInferior + amplitud);
+            Clases = (int) Math.round(LimiteInferior + LimiteSuperior);
+            Clases = Clases / 2;
             Tabla.setValueAt(LimiteInferior + " -- " + LimiteSuperior, X, 0);
+            for (int K = 0; K < numeros.length; K++) {
+                if (numeros[K] >= LimiteInferior && numeros[K] < LimiteSuperior) {
+                    Igual = Igual + 1;
+                }
+            }
+            Suma = Suma + Igual;
+            Tabla.setValueAt(Igual, X, 2);
+            Igual = 0;
+            Tabla.setValueAt(Clases, X, 1);
             LimiteInferior = LimiteSuperior;
-
+            Clases = 0;
         }
-
+        
+        System.out.println("SUMA TOTAL DE F. ABS. "+Suma);
         SalidaRango.setText("EL RANGO ES: " + rango);
         SalidaIntervalo.setText("EL INTERVALO ES: " + intervalo);
         SalidaAmplitud.setText("LA AMPLITUD ES: " + amplitud);
