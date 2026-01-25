@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author Damian
  */
 public class Pruebas1 extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Pruebas1.class.getName());
 
     /**
@@ -53,15 +53,17 @@ public class Pruebas1 extends javax.swing.JFrame {
         // quiero utilizar los datos enteros despues de hacer
         // el Math.round para redondear
 
-        
-        
         // ahora se calcula la amplitud con un ciclo 
         // para poder obtener el limite inferior y limite superior
         double LimiteInferior = menor;
         double LimiteSuperior;
         int Clases;
-        int Igual = 0;
-        int Suma =0;
+        double Igual = 0;
+        double Suma = 0;
+        double FRA;
+        double Total = numeros.length;
+        double FR;
+        System.out.println("TOTAL DE DATOS;  " + Total);
 
         for (int X = 0; X < intervalo; X++) {
             LimiteSuperior = (LimiteInferior + amplitud);
@@ -74,14 +76,23 @@ public class Pruebas1 extends javax.swing.JFrame {
                 }
             }
             Suma = Suma + Igual;
-            Tabla.setValueAt(Igual, X, 2);
-            Igual = 0;
+            FRA = Suma / Total;
+            FR = Igual / Total;
+            
+            
             Tabla.setValueAt(Clases, X, 1);
+            Tabla.setValueAt(Igual, X, 2);
+            Tabla.setValueAt(Suma, X, 3);
+            Tabla.setValueAt(FR, X, 4);
+            Tabla.setValueAt(FRA, X, 5);
+            
+            
+            Igual = 0;
             LimiteInferior = LimiteSuperior;
-            Clases = 0;
         }
         
-        System.out.println("SUMA TOTAL DE F. ABS. "+Suma);
+
+        System.out.println("SUMA TOTAL DE F. ABS. " + Suma);
         SalidaRango.setText("EL RANGO ES: " + rango);
         SalidaIntervalo.setText("EL INTERVALO ES: " + intervalo);
         SalidaAmplitud.setText("LA AMPLITUD ES: " + amplitud);
@@ -91,7 +102,6 @@ public class Pruebas1 extends javax.swing.JFrame {
         System.out.println("Amplitud " + amplitud);
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
