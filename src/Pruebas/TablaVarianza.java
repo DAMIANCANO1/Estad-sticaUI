@@ -78,12 +78,35 @@ public class TablaVarianza extends javax.swing.JFrame {
                 break;
             }
         }
-
+        
+        double Varianza;
+        double Contador;
+        double ConteoFinal;
+        double Longitud = SumaFrecuencia - 1;
+        double Sumas = 0;
+        double Sumas1;
+        
         double TotalM = (TotalMedia / SumaFrecuencia);
+        
+        for ( int U = 0; U < lineas1.length; U++){
+            Contador = (Dato[U] - TotalM);  
+            Varianza = Contador*Contador;
+            Sumas1 = (Frecuencia[U]*Varianza);
+            Sumas = Sumas + Sumas1;
+            System.out.println(Sumas);
+            Contador = 0;
+            Varianza=0;
+        }
+        
+        ConteoFinal = Sumas / Longitud;
+        double Estandar = Math.sqrt(ConteoFinal);
+
 
         SalidaMedia.setText(" " + TotalM);
         SalidaModa.setText(" " + MayorT);
         SalidaMediana.setText(" " + Resultado);
+        SalidaVarianza.setText(" "+ConteoFinal);
+        SalidaEstandar.setText(" "+ Estandar);
 
     }
 
