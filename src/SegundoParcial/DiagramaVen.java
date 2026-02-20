@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package SegundoParcial;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -17,6 +18,56 @@ public class DiagramaVen extends javax.swing.JFrame {
      */
     public DiagramaVen() {
         initComponents();
+        this.setTitle("DIAGRAMA DE VEN");
+        this.setLocationRelativeTo(null);
+    }
+    
+    public void DiagramaEntero (){
+        DefaultListModel ModeloAB = new DefaultListModel();
+        DefaultListModel ModeloA = new DefaultListModel();
+        DefaultListModel ModeloB = new DefaultListModel();
+        
+        String DatosTotales = (EntradaTotal.getText());
+        String[] ContTotal = DatosTotales.split("\\n");
+        int Total[] = new int [ContTotal.length];
+        
+        String DatosA = (EntradaA.getText());
+        String[] ContA = DatosA.split("\\n");
+        int TotalA[] = new int [ContA.length];
+        
+        String DatosB = (EntradaB.getText());
+        String[] ContB = DatosB.split("\\n");
+        int TotalB[] = new int [ContB.length];
+        
+        
+        for (int i = 0; i < ContA.length; i++) {    
+            TotalA[i] = Integer.parseInt(ContA[i].trim());
+            
+        }
+               
+        for (int i = 0; i < ContB.length; i++) {
+            TotalB[i] = Integer.parseInt(ContB[i].trim());
+            
+        }
+        
+        for (int i = 0; i < ContTotal.length; i++) {
+            Total[i] = Integer.parseInt(ContTotal[i].trim());
+        }
+        
+        for (int i = 0; i < TotalA.length; i++) {
+            for (int j = 0; j < TotalB.length; j++) {
+                if (TotalA[i] == TotalB[j]){
+                   ModeloAB.addElement(TotalA[i]+ "");                  
+                }
+            }
+        }
+        for (int i = 0; i <TotalA.length; i++) {
+            if();
+            
+        }
+        SalidaAB.setModel(ModeloAB);
+        SalidaA.setModel(ModeloA);
+        SalidaB.setModel(ModeloB);
     }
 
     /**
@@ -29,36 +80,77 @@ public class DiagramaVen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        SalidaB = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        SalidaA = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        SalidaAB = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        EntradaB = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Afuera = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EntradaB = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         EntradaTotal = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         EntradaA = new javax.swing.JTextArea();
+        BtnDecimal = new javax.swing.JButton();
+        BtnEntero = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tabla.png"))); // NOI18N
+        SalidaB.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane4.setViewportView(SalidaB);
 
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 60, 150));
+
+        SalidaA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane5.setViewportView(SalidaA);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 60, 170));
+
+        SalidaAB.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane6.setViewportView(SalidaAB);
+
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 70, 150));
+
+        jLabel2.setBackground(new java.awt.Color(204, 255, 255));
         jLabel2.setFont(new java.awt.Font("Elephant", 0, 36)); // NOI18N
         jLabel2.setText("DIAGRAMA DE VEN");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 6, -1, -1));
+
+        jLabel3.setText("INGRESA TUS DATOS");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 151, -1, -1));
+
+        jLabel4.setText("INGRESA TUS DATOS A");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(981, 307, -1, -1));
+
+        jScrollPane7.setViewportView(Afuera);
+
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 50, -1));
+
+        jLabel5.setText("INGRESA TUS DATOS B");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(977, 457, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tabla.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 63, 921, 527));
 
         EntradaB.setColumns(20);
         EntradaB.setRows(5);
         EntradaB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EntradaB.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(EntradaB);
+        EntradaB.getAccessibleContext().setAccessibleParent(jScrollPane3);
 
-        jLabel3.setText("INGRESA TUS DATOS");
-
-        jLabel4.setText("INGRESA TUS DE A");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 479, 226, 104));
 
         EntradaTotal.setColumns(20);
         EntradaTotal.setRows(5);
@@ -66,7 +158,7 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(EntradaTotal);
 
-        jLabel5.setText("INGRESA TUS DE B");
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 173, 226, 122));
 
         EntradaA.setColumns(20);
         EntradaA.setRows(5);
@@ -74,64 +166,18 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaA.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane3.setViewportView(EntradaA);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(333, 333, 333))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel5)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(41, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 329, 226, 116));
+
+        BtnDecimal.setText("DECIMAL");
+        jPanel1.add(BtnDecimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 601, -1, -1));
+
+        BtnEntero.setText("ENTEROS");
+        BtnEntero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEnteroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnEntero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 601, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,16 +185,19 @@ public class DiagramaVen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnEnteroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnteroActionPerformed
+        DiagramaEntero();
+    }//GEN-LAST:event_BtnEnteroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,9 +225,15 @@ public class DiagramaVen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> Afuera;
+    private javax.swing.JButton BtnDecimal;
+    private javax.swing.JButton BtnEntero;
     private javax.swing.JTextArea EntradaA;
     private javax.swing.JTextArea EntradaB;
     private javax.swing.JTextArea EntradaTotal;
+    private javax.swing.JList<String> SalidaA;
+    private javax.swing.JList<String> SalidaAB;
+    private javax.swing.JList<String> SalidaB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -188,5 +243,9 @@ public class DiagramaVen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }
