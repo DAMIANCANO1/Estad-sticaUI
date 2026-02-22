@@ -22,9 +22,9 @@ public class DiagramaVen extends javax.swing.JFrame {
         this.setTitle("DIAGRAMA DE VEN");
         this.setLocationRelativeTo(null);
     }
-    
-    public void DiagramaEntero (){
-        
+
+    public void DiagramaEntero() {
+
         String DatosTotales = (EntradaTotal.getText());
         String[] ContTotal = DatosTotales.split("\\n");
         int Total[] = new int[ContTotal.length];
@@ -40,7 +40,7 @@ public class DiagramaVen extends javax.swing.JFrame {
         for (int i = 0; i < ContA.length; i++) {
             TotalA[i] = Integer.parseInt(ContA[i].trim());
         }
-        
+
         for (int i = 0; i < ContB.length; i++) {
             TotalB[i] = Integer.parseInt(ContB[i].trim());
         }
@@ -94,11 +94,13 @@ public class DiagramaVen extends javax.swing.JFrame {
         // en caso de que no esten se imprimen los numeros afuera de los circulos
         //De igual manera se crea una lista para despues hacer las operaciones 
         ArrayList<Integer> ListaAfuera = new ArrayList<>();
+
         for (int j = 0; j < Total.length; j++) {
             boolean Bandera2 = false;
 
             for (int i = 0; i < TotalA.length; i++) {
-                boolean Bandera1 = false;
+                Bandera2 = false;
+
                 if (Total[j] == TotalA[i]) {
                     Bandera2 = true;
                     break;
@@ -118,6 +120,26 @@ public class DiagramaVen extends javax.swing.JFrame {
                 }
             }
         }
+        // en el siguuiente apartado se realiza la manera en la que se hacen
+        // las operaciones de cada apartado previamente definido por el
+        // programa para que el usuario solo vea los resultados segun la operacion 
+
+        // A y B union (abarca los dos circulos completos)
+        // Se tendra que sumar todas las listas de A, B y la interseccion de las dos
+        // para luego dividirlo entre el numero total de numeros
+        double PrimeraU = (double) (ListaAB.size() + ListaA.size() + ListaB.size()) / Total.length;
+        double Interseccion = (double) ListaAB.size() / Total.length;
+        double FueraDeA = (double) (ListaB.size() + ListaAfuera.size()) / Total.length;
+        double FueraDeB = (double) (ListaA.size() + ListaAfuera.size()) / Total.length;
+        double AUBnegado = (double) ListaAfuera.size() / Total.length;
+        double Fuera = (double) (ListaA.size() + ListaB.size() + ListaAfuera.size()) / Total.length;
+        SalidaAuB1.setText(PrimeraU + "%");
+        SalidaInterseccion.setText(Interseccion + "%");
+        SalidaSinA.setText(FueraDeA + "%");
+        SalidaSinB1.setText(FueraDeB + "%");
+        SalidaTodos.setText(AUBnegado + "%");
+        SalidaA_B_TODOS.setText(Fuera + "%");
+
     }
 
     /**
@@ -145,8 +167,20 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaTotal = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         EntradaA = new javax.swing.JTextArea();
-        BtnDecimal = new javax.swing.JButton();
         BtnEntero = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        SalidaA_B_TODOS = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        SalidaAuB1 = new javax.swing.JLabel();
+        SalidaInterseccion = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        SalidaSinA = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        SalidaSinB1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        SalidaTodos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,13 +213,13 @@ public class DiagramaVen extends javax.swing.JFrame {
         jPanel1.add(SalidaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 50, -1));
 
         jLabel3.setText("INGRESA TUS DATOS");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 151, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 90, -1, -1));
 
         jLabel4.setText("INGRESA TUS DATOS A");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(981, 307, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 260, -1, -1));
 
         jLabel5.setText("INGRESA TUS DATOS B");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(977, 457, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 430, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tabla.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 63, 921, 527));
@@ -196,7 +230,7 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaB.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(EntradaB);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 479, 226, 104));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 460, 226, 104));
 
         EntradaTotal.setColumns(20);
         EntradaTotal.setRows(5);
@@ -204,7 +238,7 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane2.setViewportView(EntradaTotal);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 173, 226, 122));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 120, 226, 122));
 
         EntradaA.setColumns(20);
         EntradaA.setRows(5);
@@ -212,28 +246,77 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaA.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane3.setViewportView(EntradaA);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 329, 226, 116));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 290, 226, 116));
 
-        BtnDecimal.setText("DECIMAL");
-        jPanel1.add(BtnDecimal, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 601, -1, -1));
-
-        BtnEntero.setText("ENTEROS");
+        BtnEntero.setText("EJECUTAR");
         BtnEntero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEnteroActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnEntero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1079, 601, -1, -1));
+        jPanel1.add(BtnEntero, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 580, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
+        jLabel6.setText("RESULTADOS");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 590, -1, -1));
+
+        SalidaA_B_TODOS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaA_B_TODOS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaA_B_TODOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 740, 90, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("P (A N B negados)");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 740, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("P (A U B)");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 640, -1, -1));
+
+        SalidaAuB1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaAuB1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaAuB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 640, 90, 30));
+
+        SalidaInterseccion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaInterseccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaInterseccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, 90, 30));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("P (A N B)");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 690, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setText("P (A)");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 730, -1, -1));
+
+        SalidaSinA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaSinA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaSinA, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 740, 90, 30));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("P (B)");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 640, -1, -1));
+
+        SalidaSinB1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaSinB1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaSinB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 640, 90, 30));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("P (A U B negado) ");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 690, 140, -1));
+
+        SalidaTodos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SalidaTodos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(SalidaTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 690, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -271,20 +354,32 @@ public class DiagramaVen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnDecimal;
     private javax.swing.JButton BtnEntero;
     private javax.swing.JTextArea EntradaA;
     private javax.swing.JTextArea EntradaB;
     private javax.swing.JTextArea EntradaTotal;
     private javax.swing.JTextArea SalidaA;
     private javax.swing.JTextArea SalidaAB;
+    private javax.swing.JLabel SalidaA_B_TODOS;
+    private javax.swing.JLabel SalidaAuB1;
     private javax.swing.JTextArea SalidaB;
+    private javax.swing.JLabel SalidaInterseccion;
+    private javax.swing.JLabel SalidaSinA;
+    private javax.swing.JLabel SalidaSinB1;
+    private javax.swing.JLabel SalidaTodos;
     private javax.swing.JTextArea SalidaTotal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
