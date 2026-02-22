@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package SegundoParcial;
-import javax.swing.DefaultListModel;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -23,51 +24,100 @@ public class DiagramaVen extends javax.swing.JFrame {
     }
     
     public void DiagramaEntero (){
-        DefaultListModel ModeloAB = new DefaultListModel();
-        DefaultListModel ModeloA = new DefaultListModel();
-        DefaultListModel ModeloB = new DefaultListModel();
         
         String DatosTotales = (EntradaTotal.getText());
         String[] ContTotal = DatosTotales.split("\\n");
-        int Total[] = new int [ContTotal.length];
-        
+        int Total[] = new int[ContTotal.length];
+
         String DatosA = (EntradaA.getText());
         String[] ContA = DatosA.split("\\n");
-        int TotalA[] = new int [ContA.length];
-        
+        int TotalA[] = new int[ContA.length];
+
         String DatosB = (EntradaB.getText());
         String[] ContB = DatosB.split("\\n");
-        int TotalB[] = new int [ContB.length];
-        
-        
-        for (int i = 0; i < ContA.length; i++) {    
+        int TotalB[] = new int[ContB.length];
+
+        for (int i = 0; i < ContA.length; i++) {
             TotalA[i] = Integer.parseInt(ContA[i].trim());
-            
         }
-               
+        
         for (int i = 0; i < ContB.length; i++) {
             TotalB[i] = Integer.parseInt(ContB[i].trim());
-            
         }
-        
+
         for (int i = 0; i < ContTotal.length; i++) {
             Total[i] = Integer.parseInt(ContTotal[i].trim());
         }
-        
+        ArrayList<Integer> ListaAB = new ArrayList<>();
+
         for (int i = 0; i < TotalA.length; i++) {
             for (int j = 0; j < TotalB.length; j++) {
-                if (TotalA[i] == TotalB[j]){
-                   ModeloAB.addElement(TotalA[i]+ "");                  
+                if (TotalA[i] == TotalB[j]) {
+                    SalidaAB.append(TotalA[i] + "\n");
+                    ListaAB.add(TotalA[i]);
                 }
             }
         }
-        for (int i = 0; i <TotalA.length; i++) {
-            if();
-            
+
+        ArrayList<Integer> ListaA = new ArrayList<>();
+
+        for (int i = 0; i < TotalA.length; i++) {
+            boolean Bandera = false;
+            for (int j = 0; j < ListaAB.size(); j++) {
+                if (ListaAB.get(j) == TotalA[i]) {
+                    Bandera = true;
+                    break;
+                }
+            }
+            if (Bandera == false) {
+                SalidaA.append(TotalA[i] + "\n");
+                ListaA.add(TotalA[i]);
+            }
         }
-        SalidaAB.setModel(ModeloAB);
-        SalidaA.setModel(ModeloA);
-        SalidaB.setModel(ModeloB);
+
+        ArrayList<Integer> ListaB = new ArrayList<>();
+
+        for (int i = 0; i < TotalB.length; i++) {
+            boolean Bandera = false;
+            for (int j = 0; j < ListaAB.size(); j++) {
+                if (ListaAB.get(j) == TotalB[i]) {
+                    Bandera = true;
+                    break;
+                }
+            }
+            if (Bandera == false) {
+                SalidaB.append(TotalB[i] + "\n");
+                ListaB.add(TotalB[i]);
+            }
+        }
+        //aqui se compara si todos los datos ingresados estan en A o B 
+        // en caso de que no esten se imprimen los numeros afuera de los circulos
+        //De igual manera se crea una lista para despues hacer las operaciones 
+        ArrayList<Integer> ListaAfuera = new ArrayList<>();
+        for (int j = 0; j < Total.length; j++) {
+            boolean Bandera2 = false;
+
+            for (int i = 0; i < TotalA.length; i++) {
+                boolean Bandera1 = false;
+                if (Total[j] == TotalA[i]) {
+                    Bandera2 = true;
+                    break;
+                }
+
+            }
+            if (Bandera2 == false) {
+                boolean Bandera2_1 = false;
+                for (int i = 0; i < TotalB.length; i++) {
+                    if (Total[j] == TotalB[i]) {
+                        Bandera2_1 = true;
+                    }
+                }
+                if (Bandera2_1 == false) {
+                    SalidaTotal.append(Total[j] + "\n");
+                    ListaAfuera.add(Total[j]);
+                }
+            }
+        }
     }
 
     /**
@@ -80,17 +130,13 @@ public class DiagramaVen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        SalidaB = new javax.swing.JList<>();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        SalidaA = new javax.swing.JList<>();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        SalidaAB = new javax.swing.JList<>();
+        SalidaAB = new javax.swing.JTextArea();
+        SalidaB = new javax.swing.JTextArea();
+        SalidaTotal = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
+        SalidaA = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        Afuera = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -107,35 +153,36 @@ public class DiagramaVen extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SalidaB.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane4.setViewportView(SalidaB);
+        SalidaAB.setColumns(20);
+        SalidaAB.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SalidaAB.setRows(5);
+        jPanel1.add(SalidaAB, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 50, -1));
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 60, 150));
+        SalidaB.setColumns(20);
+        SalidaB.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SalidaB.setRows(5);
+        jPanel1.add(SalidaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 50, -1));
 
-        SalidaA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane5.setViewportView(SalidaA);
-
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 60, 170));
-
-        SalidaAB.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane6.setViewportView(SalidaAB);
-
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 250, 70, 150));
+        SalidaTotal.setColumns(20);
+        SalidaTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SalidaTotal.setRows(5);
+        jPanel1.add(SalidaTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 50, -1));
 
         jLabel2.setBackground(new java.awt.Color(204, 255, 255));
         jLabel2.setFont(new java.awt.Font("Elephant", 0, 36)); // NOI18N
-        jLabel2.setText("DIAGRAMA DE VEN");
+        jLabel2.setText("DIAGRAMA DE VENN");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 6, -1, -1));
+
+        SalidaA.setColumns(20);
+        SalidaA.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        SalidaA.setRows(5);
+        jPanel1.add(SalidaA, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 50, -1));
 
         jLabel3.setText("INGRESA TUS DATOS");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 151, -1, -1));
 
         jLabel4.setText("INGRESA TUS DATOS A");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(981, 307, -1, -1));
-
-        jScrollPane7.setViewportView(Afuera);
-
-        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 50, -1));
 
         jLabel5.setText("INGRESA TUS DATOS B");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(977, 457, -1, -1));
@@ -148,7 +195,6 @@ public class DiagramaVen extends javax.swing.JFrame {
         EntradaB.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EntradaB.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(EntradaB);
-        EntradaB.getAccessibleContext().setAccessibleParent(jScrollPane3);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(933, 479, 226, 104));
 
@@ -183,13 +229,13 @@ public class DiagramaVen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,15 +271,15 @@ public class DiagramaVen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> Afuera;
     private javax.swing.JButton BtnDecimal;
     private javax.swing.JButton BtnEntero;
     private javax.swing.JTextArea EntradaA;
     private javax.swing.JTextArea EntradaB;
     private javax.swing.JTextArea EntradaTotal;
-    private javax.swing.JList<String> SalidaA;
-    private javax.swing.JList<String> SalidaAB;
-    private javax.swing.JList<String> SalidaB;
+    private javax.swing.JTextArea SalidaA;
+    private javax.swing.JTextArea SalidaAB;
+    private javax.swing.JTextArea SalidaB;
+    private javax.swing.JTextArea SalidaTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -243,9 +289,5 @@ public class DiagramaVen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     // End of variables declaration//GEN-END:variables
 }
